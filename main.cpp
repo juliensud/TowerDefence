@@ -1,11 +1,11 @@
 #include <SFML/Graphics.hpp>
+#define HAUTEUR (768)
+#define LARGEUR (1024)
+#define CARRE (LARGEUR/20)
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
-
+sf::Event event;
 	
 	sf::Font font;
 
@@ -14,13 +14,15 @@ font.loadFromFile("polices/digital.ttf");   // la police d'ecriture
 
 	sf::RenderWindow window(sf::VideoMode(LARGEUR, HAUTEUR), "Jeux");
 	 sf::RectangleShape fond(sf::Vector2f(LARGEUR,HAUTEUR));
-	fond.setTexture(&img);
+	
 
 	sf::Texture img;
 	img.setRepeated(true);
 	img.loadFromFile("images/image.jpg");   // fond d'ecran
-
-	sf::Text choix2;
+	fond.setTexture(&img);
+	
+	
+	sf::Text jouer;
 	jouer.setFont(font);
 	jouer.setCharacterSize(60);
 	jouer.setColor(sf::Color::Red);
@@ -35,7 +37,8 @@ font.loadFromFile("polices/digital.ttf");   // la police d'ecriture
 				window.clear();
 				positionSouris = sf::Mouse::getPosition(window);
                 int mouseY = positionSouris.y;
-				if (mouseY>HAUTEUR/2-HAUTEUR/20 && mouseY<HAUTEUR/2+HAUTEUR/20 && mousex<LARGEUR/2+LARGEUR/20  && mouseY>LARGEUR/2-LARGEUR/20)	// si la souris est sur "jouer"
+				 int mouseX = positionSouris.x;
+				if (mouseY>HAUTEUR/2-HAUTEUR/20 && mouseY<HAUTEUR/2+HAUTEUR/20 && mouseX<LARGEUR/2+LARGEUR/20  && mouseX>LARGEUR/2-LARGEUR/20)	// si la souris est sur "jouer"
 				{
 						jouer.setCharacterSize(100);					//on met le texte en evidence				
 						jouer.setPosition(LARGEUR/4,HAUTEUR/2);
@@ -85,7 +88,7 @@ font.loadFromFile("polices/digital.ttf");   // la police d'ecriture
         }
 
         window.clear();
-        window.draw(shape);
+        window.draw(fond);
         window.display();
     }
 
