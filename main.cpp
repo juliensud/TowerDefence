@@ -3,36 +3,30 @@
 #define LARGEUR (1024)
 #define CARRE (LARGEUR/20)
 
-int main()
+
+int menuPrincipal(sf::RenderWindow & window)
 {
-sf::Event event;
-	
-	sf::Font font;
-
-font.loadFromFile("polices/digital.ttf");   // la police d'ecriture
+		sf::Font font;
 
 
-	sf::RenderWindow window(sf::VideoMode(LARGEUR, HAUTEUR), "Jeux");
-	 sf::RectangleShape fond(sf::Vector2f(LARGEUR,HAUTEUR));
-	
 
-	sf::Texture img;
-	img.setRepeated(true);
-	img.loadFromFile("images/image.jpg");   // fond d'ecran
-	fond.setTexture(&img);
-	
-	
-	sf::Text jouer;
-	jouer.setFont(font);
-	jouer.setCharacterSize(60);
-	jouer.setColor(sf::Color::Red);
-	jouer.setPosition(LARGEUR/2,HAUTEUR-HAUTEUR/2);
-	jouer.setString("Jouer");
+		sf::RectangleShape fond(sf::Vector2f(LARGEUR,HAUTEUR));
+		sf::Texture img;
+		img.setRepeated(true);
+		img.loadFromFile("images/image.jpg");   // fond d'ecran
+		fond.setTexture(&img);
+
+		sf::Text jouer;
+		jouer.setFont(font);
+		jouer.setCharacterSize(60);
+		jouer.setColor(sf::Color::Red);
+		jouer.setPosition(LARGEUR/2,HAUTEUR-HAUTEUR/2);
+		jouer.setString("Jouer");
 
 		bool choix=true;
-		
+
 		 sf::Vector2i positionSouris;
-		 
+
 		 	do{
 				window.clear();
 				positionSouris = sf::Mouse::getPosition(window);
@@ -40,7 +34,7 @@ font.loadFromFile("polices/digital.ttf");   // la police d'ecriture
 				 int mouseX = positionSouris.x;
 				if (mouseY>HAUTEUR/2-HAUTEUR/20 && mouseY<HAUTEUR/2+HAUTEUR/20 && mouseX<LARGEUR/2+LARGEUR/20  && mouseX>LARGEUR/2-LARGEUR/20)	// si la souris est sur "jouer"
 				{
-						jouer.setCharacterSize(100);					//on met le texte en evidence				
+						jouer.setCharacterSize(100);					//on met le texte en evidence
 						jouer.setPosition(LARGEUR/4,HAUTEUR/2);
 				}
 				else
@@ -48,10 +42,10 @@ font.loadFromFile("polices/digital.ttf");   // la police d'ecriture
 						jouer.setCharacterSize(60);						//sinon on l'affiche normalement
 						jouer.setPosition(LARGEUR/2,HAUTEUR-HAUTEUR/2);
 				}
-				
+
 	window.draw(fond);			// on affiche le fond d'ecran
 	window.draw(jouer);			//on affiche le texte
-	window.display();			
+	window.display();
 	if (event.type == sf::Event::MouseButtonPressed)
 	{
     if (event.mouseButton.button == sf::Mouse::Left)	// si on appui sur le bouton gauche de la souris
@@ -71,13 +65,24 @@ font.loadFromFile("polices/digital.ttf");   // la police d'ecriture
 
         }
 }while (choix);
-	
-	
-	
-	
-	
-	
-	
+
+}
+
+
+
+
+int main()
+{
+
+
+
+	sf::RenderWindow window(sf::VideoMode(LARGEUR, HAUTEUR), "Jeux");
+
+
+
+
+
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -88,7 +93,7 @@ font.loadFromFile("polices/digital.ttf");   // la police d'ecriture
         }
 
         window.clear();
-        window.draw(fond);
+
         window.display();
     }
 
